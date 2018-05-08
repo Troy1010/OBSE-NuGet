@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>OBSE_Plugin_Dev_Package</id>
+    <version>1.0.0</version>
+    <authors>Tminus1010</authors>
+    <owners>Tminus1010</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Description Of Package..</description>
+    <releaseNotes>Init</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+  </metadata>
+  <files>
+	<file src="Oblivion-Script-Extender\common\**\*.*" target="\content\native\lib\common\" />
+  </files>
+</package>
