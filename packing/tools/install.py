@@ -11,26 +11,27 @@ print(sThisScriptName+"\Open")
 def GetScriptRoot():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
+# Possible flaws..
+#-There can be multiple sConfigurationType for different targets. How to handle that?
+#-Not all ProjectTypeGUIDs are set.
 def AddProjToSln(sProjFile, sSlnFile):
     #  Open & Parse sProjFile
     print("AddProjToSln\\Open")
     print("sSlnFile:\t"+sSlnFile)
     print("sProjFile:\t"+sProjFile)
     vTree = xml.etree.ElementTree.parse(sProjFile)
-    vRoot = vTree.getroot()
     #  Retrieve ProjectGUID from sProjFile
-    for vFound in vTree.iter():
-        if "ProjectGuid" in vFound.tag:
-            sProjectGuid = vFound.text
+    for vItem in vTree.iter():
+        if "ProjectGuid" in vItem.tag:
+            sProjectGuid = vItem.text
             break
     if not sProjectGuid:
         print("AddProjToSln\ERROR\Could not extract ProjectGuid. You'll have to add the library's project to your solution on your own.")
         quit()
     #  Retrieve ProjectTypeGUID from sProjFile
-    #-There can be multiple sConfigurationType for different targets. How to handle that?
-    for vFound in vTree.iter():
-        if "ConfigurationType" in vFound.tag:
-            sConfigurationType = vFound.text
+    for vItem in vTree.iter():
+        if "ConfigurationType" in vItem.tag:
+            sConfigurationType = vItem.text
             break
     if not sConfigurationType:
         print("AddProjToSln\ERROR\Could not extract sConfigurationType. You'll have to add the library's project to your solution on your own.")
