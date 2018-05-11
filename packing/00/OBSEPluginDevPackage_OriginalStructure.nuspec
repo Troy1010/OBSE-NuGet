@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>OBSEPluginDevPackage_OriginalStructure</id>
+    <version>1.0.1</version>
+    <authors>Tminus1010</authors>
+    <owners>Tminus1010</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Resources to make OBSE plugins</description>
+    <releaseNotes>Init</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+  </metadata>
+  <files>
+	<file src="OBSEPluginDevPackage_OriginalStructure.props" target="build\native\OBSEPluginDevPackage_OriginalStructure.props" />
+	<file src="OBSEPluginDevPackage_OriginalStructure.targets" target="build\native\OBSEPluginDevPackage_OriginalStructure.targets" />
+	<!--<file src="..\submodules\Oblivion-Script-Extender\obse\**\*.*" target="\content\obse\" exclude="..\submodules\Oblivion-Script-Extender\obse\obse_release\**\*.*"/>-->
+	<file src="..\submodules\Oblivion-Script-Extender\common\**\*.*" target="\content\include\common\" />
+  </files>
+</package>
