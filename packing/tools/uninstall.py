@@ -13,13 +13,14 @@ def GetScriptRoot():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
 def AddProjToSln_Undo(sUninstallInfoFile, sSlnFile):
+    #  Open
+    print("AddProjToSln_Undo\\Open")
     print("sSlnFile:\t\t\t"+sSlnFile)
     print("sUninstallInfoFile:\t"+sUninstallInfoFile)
     #  Retrieve sToRemoveFromSln from UninstallInfo.txt
     vUninstallInfo = open(sUninstallInfoFile,'r')
     sToRemoveFromSln = vUninstallInfo.read()
     vUninstallInfo.close()
-
     #  Remove sToRemoveFromSln from sSlnFile
     vSlnFile = open(sSlnFile,"r+")
     vCopyOfSlnFile = vSlnFile.read()
@@ -27,6 +28,8 @@ def AddProjToSln_Undo(sUninstallInfoFile, sSlnFile):
     vSlnFile.write(vCopyOfSlnFile.replace(sToRemoveFromSln,""))
     vSlnFile.truncate()
     vSlnFile.close()
+    #  Close
+    print("AddProjToSln_Undo\\Close")
 
 
 #  Find sUninstallInfoFile
@@ -36,7 +39,7 @@ if not os.path.isfile(sUninstallInfoFile):
     quit()
 
 # Remove library's project from consumer's sln
-#assume sSlnFile was passed as 1st argument to this script
+#assume sSlnFile was passed to this script as 1st argument
 AddProjToSln_Undo(sUninstallInfoFile, sys.argv[1])
 
 

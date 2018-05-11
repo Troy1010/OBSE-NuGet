@@ -1,5 +1,5 @@
 # rough draft
-#todo: make uninstall.py, maybe make it so .py can run on its own without pyton installed.
+#todo: maybe make it so .py can run on its own without pyton installed.
 
 import os, sys, glob
 import xml.etree.ElementTree
@@ -13,6 +13,7 @@ def GetScriptRoot():
 
 def AddProjToSln(sProjFile, sSlnFile):
     #  Open & Parse sProjFile
+    print("AddProjToSln\\Open")
     print("sSlnFile:\t"+sSlnFile)
     print("sProjFile:\t"+sProjFile)
     vTree = xml.etree.ElementTree.parse(sProjFile)
@@ -54,6 +55,8 @@ def AddProjToSln(sProjFile, sSlnFile):
     vSlnFile = open(sSlnFile,"a+")
     vSlnFile.write(sToWriteIntoSln)
     vSlnFile.close()
+    #  Close
+    print("AddProjToSln\\Close")
 
 
 
@@ -64,7 +67,7 @@ if not os.path.isfile(sLibProjFile):
     quit()
 
 # Add library's project to consumer's sln
-#assume sSlnFile was passed as 1st argument to this script
+#assume sSlnFile was passed to this script as 1st argument
 AddProjToSln(sLibProjFile, sys.argv[1])
 
 
