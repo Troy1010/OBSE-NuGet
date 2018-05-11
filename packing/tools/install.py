@@ -66,7 +66,7 @@ if not os.path.isfile(sLibProjFile):
     print(sThisScriptName+"\ERROR\Could not locate the library's project file at "+sLibProjFile+". You'll have to add the library's project to your solution on your own.")
     quit()
 
-# Add library's project to consumer's sln
+#  Add library's project to consumer's sln
 #assume sSlnFile was passed to this script as 1st argument
 AddProjToSln(sLibProjFile, sys.argv[1])
 
