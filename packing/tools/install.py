@@ -62,7 +62,7 @@ def AddProjToSln(sProjFile, sSlnFile):
 
 
 #  Find sLibProjFile
-sLibProjFile = str(Path(GetScriptRoot()).parent) + "\\lib\\common\\common.vcxproj"
+sLibProjFile = str(Path(GetScriptRoot()).parent) + "\\lib\\native\\common\\common.vcxproj"
 if not os.path.isfile(sLibProjFile):
     print(sThisScriptName+"\ERROR\Could not locate the library's project file at "+sLibProjFile+". You'll have to add the library's project to your solution on your own.")
     quit()
