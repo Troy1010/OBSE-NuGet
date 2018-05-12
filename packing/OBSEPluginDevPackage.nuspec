@@ -12,18 +12,21 @@
   </metadata>
   <files>
     <!-- Targets -->
-	  <file src="OBSEPluginDevPackage.targets" target="build\native\OBSEPluginDevPackage.targets" />
+	<file src="OBSEPluginDevPackage.targets" target="build\native\OBSEPluginDevPackage.targets" />
     <!-- install.PS1, install.py, uninstall.PS1, uninstall.py-->
-  	<file src="tools/install.ps1" target="tools/install.ps1" />
-  	<file src="tools/install.py" target="tools/install.py" />
-  	<file src="tools/uninstall.ps1" target="tools/uninstall.ps1" />
-  	<file src="tools/uninstall.py" target="tools/uninstall.py" />
-  	<!-- common -->
-  	<file src="..\submodules\Oblivion-Script-Extender\common\**\*.*" target="\lib\native\common\" />
-  	<!-- Misc -->
-  	<!--<file src="..\submodules\Oblivion-Script-Extender\common\**\*.*" target="\content\native\include\common\" />-->
-  	<!--<file src="..\submodules\Oblivion-Script-Extender\obse\**\*.*" target="\content\native\include\obse\" exclude="..\submodules\Oblivion-Script-Extender\obse\obse_release\**\*.*"/>-->
-  	<!--
+	<file src="tools/install.ps1" target="tools/install.ps1" />
+	<file src="tools/install.py" target="tools/install.py" />
+	<file src="tools/uninstall.ps1" target="tools/uninstall.ps1" />
+    <file src="tools/uninstall.py" target="tools/uninstall.py" />
+	<!--  common  -->
+	<file src="..\submodules\Oblivion-Script-Extender\common\**\*.*" target="\lib\native\common\" />
+    <!--  obse  -->
+    <!-- all obse -->
+    <!--maybe with more work the entire obse lib could be referenced, but since some of it is not immediately buildable, I'm not going to have the solution reference it-->
+    <!--instead I will simply put it in \lib\native\obse\-->
+	<file src="..\submodules\Oblivion-Script-Extender\obse\**\*.*" target="\lib\native\obse\" />
+    <!-- immediately buildable -->
+    <!--these are included in the solution because they are immediately buildable. There are duplicates in \lib\native\obse\-->
   	<file src="..\submodules\Oblivion-Script-Extender\obse\obse\GameActorValues.cpp" target="\content\native\include\obse\" />
   	<file src="..\submodules\Oblivion-Script-Extender\obse\obse\GameActorValues.h" target="\content\native\include\obse\" />
   	<file src="..\submodules\Oblivion-Script-Extender\obse\obse\GameAPI.cpp" target="\content\native\include\obse\" />
@@ -57,10 +60,7 @@
   	<file src="..\submodules\Oblivion-Script-Extender\obse\obse\Script.h" target="\content\native\include\obse\" />
   	<file src="..\submodules\Oblivion-Script-Extender\obse\obse\Utilities.cpp" target="\content\native\include\obse\" />
   	<file src="..\submodules\Oblivion-Script-Extender\obse\obse\Utilities.h" target="\content\native\include\obse\" />
-  	<file src="..\submodules\Oblivion-Script-Extender\obse\StdAfx.cpp" target="\content\native\include\obse\" />
-  	<file src="..\submodules\Oblivion-Script-Extender\obse\StdAfx.h" target="\content\native\include\obse\" />
-  	<file src="..\submodules\Oblivion-Script-Extender\obse\**\*.*" target="\lib\native\include\obse\" exclude="..\submodules\Oblivion-Script-Extender\obse\obse_release\**\*.*"/>
-  	<file src="..\submodules\Oblivion-Script-Extender\common\**\*.*" target="\lib\native\include\common\" />
-  	-->
+  	<file src="..\submodules\Oblivion-Script-Extender\obse\StdAfx.cpp" target="\content\native\include\obse\StdAfx_obse.cpp" />
+  	<file src="..\submodules\Oblivion-Script-Extender\obse\StdAfx.h" target="\content\native\include\obse\StdAfx_obse.h" />
   </files>
 </package>
