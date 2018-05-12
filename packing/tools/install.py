@@ -89,4 +89,5 @@ AddProjToSln(sLibProjFile, sys.argv[1])
 
 
 #  close
+print("**** This library is x84 ****")
 print(sThisScriptName+"\Close")
