@@ -19,7 +19,10 @@ class OBSEPackaging(ConanFile):
         subprocess.call(['git', 'checkout', '338206760744df35711bde343d7efe5367644d75'])
 
     def build(self):
-        pass
+        msbuild = MSBuild(self)
+        sToolset = self.settings.compiler.toolset #Override the toolset that's defined in upcoming .vcxproj
+        msbuild.build_env.runtime = self.settings.compiler.runtime
+        msbuild.build("Oblivion-Script-Extender/common/common.vcxproj", toolset=sToolset)
 
     def package(self):
         self.copy('common/*',src='Oblivion-Script-Extender')
