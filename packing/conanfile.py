@@ -24,6 +24,7 @@ class OBSEPackaging_Conan(ConanFile):
         os.chdir('Oblivion-Script-Extender')
         subprocess.call(['git', 'clone', 'https://github.com/llde/Oblivion-Script-Extender.git', '.', '--no-checkout'])
         subprocess.call(['git', 'checkout', '338206760744df35711bde343d7efe5367644d75'])
+        os.chdir('..')
 
     def build(self):
         msbuild = MSBuild(self)
