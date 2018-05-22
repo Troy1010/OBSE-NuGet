@@ -32,8 +32,16 @@ class OBSEPackaging_Conan(ConanFile):
         msbuild.build("Oblivion-Script-Extender/common/common.vcxproj", toolset=sToolset)
 
     def package(self):
-        self.copy('common/*',src='Oblivion-Script-Extender')
-        self.copy('obse/*',src='Oblivion-Script-Extender')
+        self.copy('common.lib',src='Oblivion-Script-Extender/common/Debug/',dst='lib/')
+        self.copy('*.h',src='Oblivion-Script-Extender/common/',dst='include/common/')
+        self.copy('*.cpp',src='Oblivion-Script-Extender/common/',dst='include/common/')
+        self.copy('*.h',src='Oblivion-Script-Extender/obse/',dst='include/obse/')
+        self.copy('*.cpp',src='Oblivion-Script-Extender/obse/',dst='include/obse/')
 
     def package_info(self):
+        self.cpp_info.libdirs = ['lib']
+        self.cpp_info.libs = ['common.lib']
+        self.cpp_info.includedirs = ['include','include/obse/']
+
+    def deploy(self):
         pass
