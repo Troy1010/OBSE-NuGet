@@ -1,12 +1,19 @@
-from conans import ConanFile, CMake, tools
+from conans import ConanFile, MSBuild
 import subprocess, os, errno
 
-class OBSEPackaging(ConanFile):
-    name = "OBSE_Packaging"
+class OBSEPackaging_Conan(ConanFile):
+    name = "OBSEPluginDevPackage"
     version = "0.1"
     license = "MIT"
     url = "https://github.com/Troy1010/OBSE-Packaging"
-    description = "Packages OBSE as a Conan package."
+    description = "Development sources for OBSE plugins."
+    settings = "os", "compiler", "build_type", "arch"
+
+    def configure(self):
+        if self.settings.arch != "x86":
+            raise Exception("OBSEPackaging_Conan|The common.vcxproj that this recipe builds does not yet support any arch besides x86")
+        if self.settings.compiler != "Visual Studio":
+            raise Exception("OBSEPackaging_Conan|This recipe does not yet support any compilers besides VisualStudio")
 
     def source(self):
         try:
