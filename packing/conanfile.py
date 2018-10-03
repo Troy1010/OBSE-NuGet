@@ -1,5 +1,22 @@
+##region Settings
+bPause = True
+##endregion
 from conans import ConanFile, MSBuild
-import subprocess, os, errno
+import subprocess, os, errno, ctypes
+import TM_CommonPy as TM
+
+##region DoubleclickEvent
+if __name__ == "__main__":
+    try:
+        TM.Run("conan create . Troy1010/channel -pr conanprofile_OBSEPlugin")
+    except Exception as e:
+        print(e)
+        os.system('pause')
+        raise
+    if bPause:
+        print("\n\t\t\tDone\n")
+        os.system('pause')
+##endregion
 
 class OBSEPackaging_Conan(ConanFile):
     name = "OBSEPluginDevPackage"
@@ -8,12 +25,7 @@ class OBSEPackaging_Conan(ConanFile):
     url = "https://github.com/Troy1010/OBSE-Packaging"
     description = "Development sources for OBSE plugins."
     settings = "os", "compiler", "build_type", "arch"
-
-    def configure(self):
-        if self.settings.arch != "x86":
-            raise Exception("OBSEPackaging_Conan|The common.vcxproj that this recipe builds does not yet support any arch besides x86")
-        if self.settings.compiler != "Visual Studio":
-            raise Exception("OBSEPackaging_Conan|This recipe does not yet support any compilers besides VisualStudio")
+    exports = "RecommendedIntegration.py"
 
     def source(self):
         try:
@@ -26,23 +38,18 @@ class OBSEPackaging_Conan(ConanFile):
         subprocess.call(['git', 'checkout', '338206760744df35711bde343d7efe5367644d75'])
         os.chdir('..')
 
-    def build(self):
-        msbuild = MSBuild(self)
-        sToolset = self.settings.compiler.toolset #Override the toolset that's defined in upcoming .vcxproj
-        msbuild.build_env.runtime = self.settings.compiler.runtime
-        msbuild.build("Oblivion-Script-Extender/common/common.vcxproj", toolset=sToolset)
-
     def package(self):
-        self.copy('common.lib',src='Oblivion-Script-Extender/common/Debug/',dst='lib/')
+        #---RecommendedIntegration
+        self.copy("RecommendedIntegration.py")
+        #---common
+        self.copy('common.vcxproj',src='Oblivion-Script-Extender/common/',dst='include/common/')
         self.copy('*.h',src='Oblivion-Script-Extender/common/',dst='include/common/')
         self.copy('*.cpp',src='Oblivion-Script-Extender/common/',dst='include/common/')
+        self.copy('*.inl',src='Oblivion-Script-Extender/common/',dst='include/common/')
+        #---obse
         self.copy('*.h',src='Oblivion-Script-Extender/obse/',dst='include/obse/')
         self.copy('*.cpp',src='Oblivion-Script-Extender/obse/',dst='include/obse/')
+        self.copy('*.inl',src='Oblivion-Script-Extender/obse/',dst='include/obse/')
 
     def package_info(self):
-        self.cpp_info.libdirs = ['lib']
-        self.cpp_info.libs = ['common.lib']
-        self.cpp_info.includedirs = ['include','include/obse/']
-
-    def deploy(self):
-        pass
+        self.cpp_info.includedirs = ['include','include/obse']
