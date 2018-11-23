@@ -30,6 +30,7 @@ def Undo(sRoot,sProj,sSln):
             with vDTEWrapper.OpenProj(sProj) as vProjWrapper:
                 for vItem in cRecommendedIntegrationFiles:
                     vProjWrapper.RemoveFile(os.path.join(sRoot,sRecommendedIntegrationFolder,vItem))
-                with vDTEWrapper.OpenProj(os.path.join(sRoot,"include/common/common.vcxproj")) as vProjectWrapperToUnreference:
-                    vProjWrapper.RemoveProjRef(vProjectWrapperToUnreference.vProj)
+                vProjWrapper.RemoveProjRef("common")
+                if vProjWrapper.IsFilterEmpty("obse"):
+                    vProjWrapper.RemoveFilter("obse")
             vSlnWrapper.RemoveProj(os.path.join(sRoot,"include/common/common.vcxproj"))

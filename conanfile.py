@@ -23,6 +23,17 @@ class OBSEPackaging_Conan(ConanFile):
         os.chdir('Oblivion-Script-Extender')
         subprocess.call(['git', 'clone', 'https://github.com/llde/Oblivion-Script-Extender.git', '.', '--no-checkout'])
         subprocess.call(['git', 'checkout', '338206760744df35711bde343d7efe5367644d75'])
+        #-Remove winsock2.h from StdAfx.h
+        with open("obse/StdAfx.h", 'r+') as f:
+            cLines = f.readlines()
+            f.seek(0)
+            for sLine in cLines:
+                if "#include <winsock2.h>" in sLine:
+                    pass
+                else:
+                    f.write(sLine)
+            f.truncate()
+        #-
         os.chdir('..')
 
     def package(self):
